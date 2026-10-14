@@ -1,0 +1,13 @@
+out/
+out-teste/
+bin/
+dist/
+dados/
+*.class
+.metadata/
+.idea/
+*.iml
+
+# Scripts pessoais de acesso à VPN/VM da UTFPR (contêm o login do aluno)
+vpn-utfpr.sh
+vm-utfpr.sh
