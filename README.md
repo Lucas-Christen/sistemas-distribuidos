@@ -17,7 +17,7 @@ java -jar dist/servidor.jar              # janela do servidor (porta padrão 215
 java -jar dist/servidor.jar --console    # servidor no terminal (pergunta a porta)
 java -jar dist/servidor.jar --console 21500 --dados minha-pasta
 java -jar dist/cliente.jar               # janela do cliente
-./testar.sh                              # Windows: testar.bat — roda os 179 testes
+./testar.sh                              # Windows: testar.bat — roda os 182 testes
 ```
 
 ### Pelo Eclipse
@@ -62,7 +62,7 @@ Todas as mensagens estão centralizadas em `protocolo/Protocolo.java`.
 | `username` de outra pessoa (getuser/update/delete) | `401 "Operação não autorizada"` | `username` é o ID da operação (negrito na planilha); admin ainda não especificado |
 | `username` ausente nessas operações | Vale o dono do token | Tolerância com clientes que não mandam |
 | Senha atual errada | `401 "Senha atual incorreta"` | Mesma semântica do login (credencial errada) |
-| Nova senha igual à atual | Aceita (200) | A especificação não proíbe |
+| Nova senha igual à atual | `400 "Senha fora do padrão"` | Trocar pela mesma senha não é uma troca; usa a mensagem padrão de senha do documento |
 | `method` desconhecido | `400 "Método desconhecido: X"` | Requisição inválida |
 | `method` com maiúscula (`"Login"`) | Aceito | O cliente deveria mandar minúsculo, mas aceitar não custa nada |
 | `name` com acento (`João`) | Aceito | Só o `username` proíbe acento |
@@ -113,7 +113,7 @@ teste/br/edu/utfpr/sdcontas/   TodosOsTestes, TesteProtocolo, TesteServidor, Ver
 
 ## Testes
 
-`./testar.sh` roda **179 verificações** sem JUnit:
+`./testar.sh` roda **182 verificações** sem JUnit:
 - JSON (escapes, unicode, números, entradas inválidas) e regras de validação nos limites;
 - todos os cenários da especificação contra o servidor real numa porta livre;
 - robustez de rede (sem `\n`, multilinha, em pedaços, Windows-1252, BOM, conexão ociosa, JSON pela metade, mensagem > 64 KB);

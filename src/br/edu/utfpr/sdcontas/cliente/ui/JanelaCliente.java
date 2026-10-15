@@ -330,6 +330,10 @@ public final class JanelaCliente extends JFrame {
             aviso(Validacao.REGRA_SENHA);
             return;
         }
+        if (validarAntes.isSelected() && nova.equals(atual)) {
+            aviso("A nova senha deve ser diferente da senha atual.");
+            return;
+        }
         executar(() -> api.atualizarSenha(atual, nova), r -> {
             if (r.statusCode() == OK) {
                 senhaAtual.setText("");

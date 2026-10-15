@@ -131,6 +131,8 @@ final class TesteServidor {
                 400, "Senha fora do padrão");
         esperar(v, "outro usuário", "updateuserpassword", senhaJson(token, "outro", SENHA, "Nova1234!"),
                 401, "Operação não autorizada");
+        esperar(v, "nova senha igual à atual", "updateuserpassword", senhaJson(token, "joao.s", SENHA, SENHA),
+                400, "Senha fora do padrão");
         esperar(v, "troca válida", "updateuserpassword", senhaJson(token, "joao.s", SENHA, "Nova1234!"),
                 200, "Senha atualizada com sucesso");
         esperar(v, "login com a senha antiga falha", "login", "{\"username\":\"joao.s\",\"password\":\"" + SENHA + "\"}",

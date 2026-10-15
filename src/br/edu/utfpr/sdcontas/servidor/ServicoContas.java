@@ -135,7 +135,8 @@ public final class ServicoContas {
         if (!Senhas.confere(senhaAtual, usuario.get().password())) {
             return Resposta.erro(NAO_AUTORIZADO, MSG_SENHA_ATUAL_INCORRETA);
         }
-        if (!Validacao.senhaValida(novaSenha)) {
+        // Senha nova igual à atual não é aceita (mesma resposta de senha fora do padrão).
+        if (senhaAtual.equals(novaSenha) || !Validacao.senhaValida(novaSenha)) {
             return Resposta.erro(REQUISICAO_INVALIDA, MSG_SENHA_FORA_DO_PADRAO);
         }
         if (!repositorio.atualizarSenha(auth.username(), Senhas.gerarHash(novaSenha))) {
